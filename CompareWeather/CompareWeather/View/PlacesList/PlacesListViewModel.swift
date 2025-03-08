@@ -16,18 +16,26 @@ struct Place: Codable, Identifiable {
     let display_name: String
 }
 
-
 protocol PlacesListViewModelType {
     var loadingText: String { get }
     var places: [Place] { get }
     var isLoading: Bool { get }
     var titleText: String { get }
+    var close: String { get }
+
+    func placeSelected(_ place: Place)
 }
 
-final class PlacesListViewModel: ObservableObject, PlacesListViewModelType {
+public final class PlacesListViewModel: ObservableObject, PlacesListViewModelType {
 
     @Published var places: [Place] = []
     @Published var isLoading = false
+
+    private let place: String
+
+    init(place: String) {
+        self.place = place
+    }
 
     var loadingText: String {
         "Cargando..."
@@ -37,8 +45,17 @@ final class PlacesListViewModel: ObservableObject, PlacesListViewModelType {
         "Seleccione una ubicación"
     }
 
-    func fetchPlaces(_ place: String) {
-        guard let url = URL(string: "https://nominatim.openstreetmap.org/search?city=\(place)&format=json") else {
+    var close: String {
+        "Cerrar"
+    }
+
+    func placeSelected(_ place: Place) {
+
+    }
+
+    func fetchPlaces() {
+        guard !place.isEmpty,
+              let url = URL(string: "https://nominatim.openstreetmap.org/search?city=\(place)&format=json") else {
             return
         }
 

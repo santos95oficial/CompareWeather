@@ -15,19 +15,13 @@ protocol PresentationViewModelType {
     var openMapButtonText: String { get }
     var userSearchInput: String { get set }
 
-    func search()
     func openMap()
+    func searchPlace()
 }
 
-enum Destination: Hashable {
-    case searchPlace(userText: String)
-    case openMap
-}
-
-final class PresentationViewModel: ObservableObject, PresentationViewModelType {
+public final class PresentationViewModel: ObservableObject, PresentationViewModelType {
 
     @Published var userSearchInput: String = ""
-    @Published var navigationPath = NavigationPath() // ✅ Nueva forma de manejar la navegación
 
     var title: String {
         "Compare Weather"
@@ -43,12 +37,16 @@ final class PresentationViewModel: ObservableObject, PresentationViewModelType {
         "Abrir mapa"
     }
 
-    func search() {
-        guard !userSearchInput.isEmpty else { return }
-        navigationPath.append(Destination.searchPlace(userText: userSearchInput)) // ✅ Empujar destino
+    func openMap() {
+        /*navigationController?.pushViewController(
+            UIHostingController(
+                rootView: MapSelectionView(viewModel: MapSelectionViewModel())
+            ),
+            animated: false
+        )*/
     }
 
-    func openMap() {
-        navigationPath.append(Destination.openMap) // ✅ Empujar destino
+    func searchPlace() {
+        
     }
 }

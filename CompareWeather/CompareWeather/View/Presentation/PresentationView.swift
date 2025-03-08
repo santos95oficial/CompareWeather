@@ -8,62 +8,69 @@
 import SwiftUI
 
 struct PresentationView: View {
-    @StateObject private var viewModel = PresentationViewModel()
-    
+
+    enum PresentationViewNavigation: Identifiable {
+        case toMap
+        case toSearch
+
+        var id: Self { self }
+    }
+
+    @StateObject var viewModel: PresentationViewModel
+    @State private var selectedScreen: PresentationViewNavigation?
+
     var body: some View {
-        NavigationStack(path: $viewModel.navigationPath) { // ✅ Usamos navigationPath
-            VStack(spacing: 20) {
-                Spacer()
-                
-                Text(viewModel.title)
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .multilineTextAlignment(.center)
-                
-                TextField(viewModel.searchInputText, text: $viewModel.userSearchInput)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .font(.subheadline)
-                    .fontWeight(.medium)
+        VStack(spacing: 20) {
+            Spacer()
+
+            Text(viewModel.title)
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .multilineTextAlignment(.center)
+
+            TextField(viewModel.searchInputText, text: $viewModel.userSearchInput)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .font(.subheadline)
+                .fontWeight(.medium)
+                .padding()
+
+            Button(action: {
+                selectedScreen = .toSearch
+            }) {
+                Text(viewModel.searchButtonText)
+                    .frame(maxWidth: .infinity)
                     .padding()
-                
-                Button(action: {
-                    viewModel.search()
-                }) {
-                    Text(viewModel.searchButtonText)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-                .padding(.horizontal)
-                
-                Button(action: {
-                    viewModel.openMap()
-                }) {
-                    Text(viewModel.openMapButtonText)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.gray)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-                .padding(.horizontal)
-                
-                Spacer()
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
             }
-            .padding()
-            .navigationDestination(for: Destination.self) { destination in
-                switch destination {
-                case .searchPlace(let userText):
-                    PlacesListView(userText: userText)
+            .padding(.horizontal)
+
+            Button(action: {
+                selectedScreen = .toMap
+            }) {
+                Text(viewModel.openMapButtonText)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.gray)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
+            .padding(.horizontal)
+
+            Spacer()
+        }
+        .padding()
+        .fullScreenCover(item: $selectedScreen) { screen in
+            NavigationStack {
+                switch screen {
+                case .toMap:
+                    MapSelectionView()
+                case .toSearch:
+                    PlacesListView(viewModel: .init(place: viewModel.userSearchInput))
                 }
             }
         }
     }
 }
 
-
-#Preview {
-    PresentationView()
-}

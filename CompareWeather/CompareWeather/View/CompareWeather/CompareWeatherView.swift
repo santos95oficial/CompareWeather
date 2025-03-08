@@ -9,13 +9,9 @@ import SwiftUI
 import MapKit
 
 struct CompareWeatherView: View {
-    let location: CLLocationCoordinate2D
+    @StateObject var viewModel: CompareWeatherViewModel
 
     var body: some View {
-        Text("Latitute: \(location.latitude) - Longitute:\(location.longitude)")
+        Text(viewModel.name)
     }
-}
-
-#Preview {
-    CompareWeatherView(location: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0))
 }
