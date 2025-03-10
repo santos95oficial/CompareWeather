@@ -50,8 +50,9 @@ final class WeatherDetail {
     }
 }
 
-final class WeatherDaily {
+final class WeatherDaily: Identifiable {
 
+    let id = UUID()
     let date: Date
     let hourlyWeather: [WeatherDetail]
     let averageWeather: WeatherInfo
@@ -63,12 +64,13 @@ final class WeatherDaily {
     }
 }
 
-final class Forecast {
+final class Forecast: Identifiable {
 
     public enum ForecastFont: String, CaseIterable {
         case WeatherApi
     }
 
+    let id = UUID()
     let font: ForecastFont
     let place: String
     let weatherDaily: [WeatherDaily]

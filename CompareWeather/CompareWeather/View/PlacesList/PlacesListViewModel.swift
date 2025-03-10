@@ -8,20 +8,12 @@
 import Foundation
 import SwiftUI
 
-struct Place: Codable, Identifiable {
-    let id = UUID() // Para hacer la estructura Identifiable en SwiftUI
-    let name: String
-    let lat: String
-    let lon: String
-    let display_name: String
-}
-
 protocol PlacesListViewModelType {
     var loadingText: String { get }
     var places: [Place] { get }
     var isLoading: Bool { get }
     var titleText: String { get }
-    var close: String { get }
+    var close: String { get }
 
     func placeSelected(_ place: Place)
 }

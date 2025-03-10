@@ -14,7 +14,7 @@
 		FD0B51AE2D4FE47400C09A07 /* WeatherAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0B51AD2D4FE47400C09A07 /* WeatherAPIClient.swift */; };
 		FD0B51B12D4FE9D500C09A07 /* WeatherApiCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0B51B02D4FE9D500C09A07 /* WeatherApiCodable.swift */; };
 		FD0B51B32D4FEDE800C09A07 /* WeatherEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0B51B22D4FEDE800C09A07 /* WeatherEngine.swift */; };
-		FDB73ECB2D5E96170082A169 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB73ECA2D5E96170082A169 /* RootView.swift */; };
+		FD895BFE2D7F8684002CCD28 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD895BFD2D7F8684002CCD28 /* Place.swift */; };
 		FDB73ED12D5E9AFF0082A169 /* MapSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB73ED02D5E9AFF0082A169 /* MapSelectionViewModel.swift */; };
 		FDB73ED32D5E9C380082A169 /* CompareWeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB73ED22D5E9C380082A169 /* CompareWeatherViewModel.swift */; };
 		FDDFC7B22D528F4B0026DB68 /* PresentationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDFC7B12D528F4B0026DB68 /* PresentationView.swift */; };
@@ -35,7 +35,7 @@
 		FD0B51AD2D4FE47400C09A07 /* WeatherAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPIClient.swift; sourceTree = "<group>"; };
 		FD0B51B02D4FE9D500C09A07 /* WeatherApiCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherApiCodable.swift; sourceTree = "<group>"; };
 		FD0B51B22D4FEDE800C09A07 /* WeatherEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherEngine.swift; sourceTree = "<group>"; };
-		FDB73ECA2D5E96170082A169 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		FD895BFD2D7F8684002CCD28 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		FDB73ED02D5E9AFF0082A169 /* MapSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSelectionViewModel.swift; sourceTree = "<group>"; };
 		FDB73ED22D5E9C380082A169 /* CompareWeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareWeatherViewModel.swift; sourceTree = "<group>"; };
 		FDDFC7B12D528F4B0026DB68 /* PresentationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationView.swift; sourceTree = "<group>"; };
@@ -107,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				FD0B51A92D4F9D7D00C09A07 /* Weather.swift */,
+				FD895BFD2D7F8684002CCD28 /* Place.swift */,
 				FD0B51AF2D4FE9C400C09A07 /* Codables */,
 			);
 			path = Data;
@@ -137,21 +138,12 @@
 			path = Codables;
 			sourceTree = "<group>";
 		};
-		FDB73EC92D5E95FC0082A169 /* Root */ = {
-			isa = PBXGroup;
-			children = (
-				FDB73ECA2D5E96170082A169 /* RootView.swift */,
-			);
-			path = Root;
-			sourceTree = "<group>";
-		};
 		FDDFC7B32D528F540026DB68 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				FDF5B2452D53E6140000B29E /* CompareWeather */,
 				FDF5B2482D53E7680000B29E /* MapLocation */,
 				FDDFC7B72D52973D0026DB68 /* PlacesList */,
-				FDB73EC92D5E95FC0082A169 /* Root */,
 				FDDFC7B42D528F8B0026DB68 /* Presentation */,
 			);
 			path = View;
@@ -267,8 +259,8 @@
 				FDF5B2472D53E62D0000B29E /* CompareWeatherView.swift in Sources */,
 				FDDFC7BB2D52A2750026DB68 /* PlacesListViewModel.swift in Sources */,
 				FDF5B24A2D53E7870000B29E /* MapSelectionView.swift in Sources */,
-				FDB73ECB2D5E96170082A169 /* RootView.swift in Sources */,
 				FD0B51AA2D4F9D7D00C09A07 /* Weather.swift in Sources */,
+				FD895BFE2D7F8684002CCD28 /* Place.swift in Sources */,
 				FD0B51B32D4FEDE800C09A07 /* WeatherEngine.swift in Sources */,
 				FDB73ED32D5E9C380082A169 /* CompareWeatherViewModel.swift in Sources */,
 				FD0B51AE2D4FE47400C09A07 /* WeatherAPIClient.swift in Sources */,

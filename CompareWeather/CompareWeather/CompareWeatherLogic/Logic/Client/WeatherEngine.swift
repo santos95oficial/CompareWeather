@@ -9,32 +9,11 @@ import Foundation
 
 final class WeatherEngine {
 
-    static func fetchWeather(for location: String, completion: @escaping ([Forecast]) -> Void) {
-        var forecasts: [Forecast] = []
-        let dispatchGroup = DispatchGroup()
-
-        for font in Forecast.ForecastFont.allCases {
-            dispatchGroup.enter()
-
-            switch font {
-            case .WeatherApi:
-                WeatherAPIClient.fetchWeather(for: location) { forecast in
-                    if let forecast {
-                        forecasts.append(forecast)
-                        forecasts.append(forecast)
-                        forecasts.append(forecast)
-                    }
-                    dispatchGroup.leave()
-                }
-            }
+    static func fetchWeather(lat: Double?, lon: Double?, completion: @escaping ([Forecast]) -> Void) {
+        guard let lat, let lon else {
+            completion([])
+            return
         }
-
-        dispatchGroup.notify(queue: .main) {
-            completion(forecasts)
-        }
-    }
-
-    static func fetchWeather(lat: Double, lon: Double, completion: @escaping ([Forecast]) -> Void) {
         var forecasts: [Forecast] = []
         let dispatchGroup = DispatchGroup()
 

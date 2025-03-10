@@ -11,7 +11,7 @@ import SwiftUI
 struct CompareWeatherApp: App {
     var body: some Scene {
         WindowGroup {
-            RootView()
+            PresentationView(viewModel: .init())
         }
     }
 }
