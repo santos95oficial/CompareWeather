@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "DD65479C-1A1D-48C0-A268-D501462FAE9B"
+            uuid = "D5E63265-698C-4FE5-8C3F-7669154723A9"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CompareWeather/View/CompareWeather/CompareWeatherViewModel.swift"
+            filePath = "CompareWeather/View/CompareWeather/CompareWeatherDetailViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "fetchForecast()"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "init(weathersDaily:place:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

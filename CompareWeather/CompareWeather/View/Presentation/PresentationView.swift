@@ -1,10 +1,3 @@
-//
-//  SwiftUIView.swift
-//  CompareWeather
-//
-//  Created by Santos Ángel Pardo Ramos on 4/2/25.
-//
-
 import SwiftUI
 
 struct PresentationView: View {
@@ -20,47 +13,31 @@ struct PresentationView: View {
     @State private var selectedScreen: PresentationViewNavigation?
 
     var body: some View {
-        VStack(spacing: 20) {
-            Spacer()
+        ZStack {
+            WeatherBackgroundView()
 
-            Text(viewModel.title)
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .multilineTextAlignment(.center)
+            VStack(spacing: 20) {
+                Spacer()
 
-            TextField(viewModel.searchInputText, text: $viewModel.userSearchInput)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .font(.subheadline)
-                .fontWeight(.medium)
-                .padding()
-
-            Button(action: {
-                selectedScreen = .toSearch
-            }) {
-                Text(viewModel.searchButtonText)
-                    .frame(maxWidth: .infinity)
+                Text(viewModel.title)
+                    .font(WeatherSize.enormous.size)
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(WeatherColor.secondary.color)
                     .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-            }
-            .padding(.horizontal)
 
-            Button(action: {
-                selectedScreen = .toMap
-            }) {
-                Text(viewModel.openMapButtonText)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.gray)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-            }
-            .padding(.horizontal)
+                WeatherInputText(userSearchInput: $viewModel.userSearchInput, searchInputText: viewModel.searchInputText)
 
-            Spacer()
+                WeatherButton(type: .primary, title: viewModel.searchButtonText) {
+                    selectedScreen = .toSearch
+                }
+                WeatherButton(type: .secondary, title: viewModel.openMapButtonText) {
+                    selectedScreen = .toMap
+                }
+                Spacer()
+            }
+            .padding()
         }
-        .padding()
         .fullScreenCover(item: $selectedScreen) { screen in
             NavigationStack {
                 switch screen {
@@ -73,4 +50,3 @@ struct PresentationView: View {
         }
     }
 }
-

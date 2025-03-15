@@ -14,8 +14,6 @@ protocol PlacesListViewModelType {
     var isLoading: Bool { get }
     var titleText: String { get }
     var close: String { get }
-
-    func placeSelected(_ place: Place)
 }
 
 public final class PlacesListViewModel: ObservableObject, PlacesListViewModelType {
@@ -39,10 +37,6 @@ public final class PlacesListViewModel: ObservableObject, PlacesListViewModelTyp
 
     var close: String {
         "Cerrar"
-    }
-
-    func placeSelected(_ place: Place) {
-
     }
 
     func fetchPlaces() {

@@ -8,17 +8,19 @@
 import Foundation
 
 protocol CompareWeatherViewModelType {
-    var forecast: [Forecast] { get }
+    var place: Place { get }
+    var forecasts: [Forecast] { get }
     var close: String { get }
     var placeName: String { get }
     var coordinates: String { get }
     func fetchForecast()
+    func getWeathersDaily(date: Date) -> [WeatherDaily]
 }
 
 public final class CompareWeatherViewModel: CompareWeatherViewModelType, ObservableObject {
 
-    private let place: Place
-    @Published var forecast: [Forecast] = []
+    var place: Place
+    @Published var forecasts: [Forecast] = []
 
     var close: String {
         "Cerrar"
@@ -38,7 +40,11 @@ public final class CompareWeatherViewModel: CompareWeatherViewModelType, Observa
 
     func fetchForecast() {
         WeatherEngine.fetchWeather(lat: Double(place.lat), lon: Double(place.lon)) { forecast in
-            self.forecast = forecast
+            self.forecasts = forecast
         }
+    }
+
+    func getWeathersDaily(date: Date) -> [WeatherDaily] {
+        forecasts.compactMap { $0.weatherDaily.first { $0.date == date } }
     }
 }

@@ -25,6 +25,8 @@ final class WeatherEngine {
                 WeatherAPIClient.fetchWeather(lat: lat, lon: lon) { forecast in
                     if let forecast {
                         forecasts.append(forecast)
+                        forecasts.append(forecast)
+                        forecasts.append(forecast)
                     }
                     dispatchGroup.leave()
                 }

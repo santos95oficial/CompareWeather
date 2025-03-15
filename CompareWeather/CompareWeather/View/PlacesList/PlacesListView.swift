@@ -2,10 +2,10 @@ import SwiftUI
 import MapKit
 
 struct PlacesListView: View {
-
+    
     enum PlacesListViewNavigation: Identifiable {
         case toCompareWeather(place: Place)
-
+        
         var id: String {
             switch self {
             case .toCompareWeather(let place):
@@ -13,73 +13,75 @@ struct PlacesListView: View {
             }
         }
     }
-
+    
     @StateObject var viewModel: PlacesListViewModel
-    @Environment(\.dismiss) private var dismiss
     @State private var selectedScreen: PlacesListViewNavigation?
-
+    
     var body: some View {
-        VStack {
-            Text(viewModel.titleText)
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .multilineTextAlignment(.center)
-                .padding(.top)
-
-            if viewModel.isLoading {
-                ProgressView(viewModel.loadingText)
+        ZStack {
+            WeatherBackgroundView()
+            VStack {
+                Text(viewModel.titleText)
+                    .font(WeatherSize.enormous.size)
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(WeatherColor.secondary.color)
                     .padding()
-            } else {
-                ScrollView {
-                    LazyVStack(spacing: 16) {
-                        ForEach(viewModel.places) { place in
-                            placeItemView(place: place)
-                                .onTapGesture {
-                                    viewModel.placeSelected(place)
-                                    selectedScreen = .toCompareWeather(place: place)
-                                }
+                
+                if viewModel.isLoading {
+                    ProgressView(viewModel.loadingText)
+                        .padding()
+                } else {
+                    ScrollView {
+                        LazyVStack(spacing: 16) {
+                            ForEach(viewModel.places) { place in
+                                placeItemView(place: place)
+                                    .onTapGesture {
+                                        selectedScreen = .toCompareWeather(place: place)
+                                    }
+                            }
                         }
+                        .padding()
                     }
-                    .padding()
                 }
             }
-        }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button(viewModel.close) {
-                    dismiss()
-                }
+            .toolbar {
+                WeatherToolbarView()
             }
-        }
-        .onAppear {
-            viewModel.fetchPlaces()
-        }
-        .fullScreenCover(item: $selectedScreen) { screen in
-            NavigationStack {
-                switch screen {
-                case .toCompareWeather(let place):
-                    CompareWeatherView(viewModel: .init(place: place))
+            .onAppear {
+                viewModel.fetchPlaces()
+            }
+            .fullScreenCover(item: $selectedScreen) { screen in
+                NavigationStack {
+                    switch screen {
+                    case .toCompareWeather(let place):
+                        CompareWeatherView(viewModel: .init(place: place))
+                    }
                 }
             }
         }
     }
-
+    
     @ViewBuilder
     private func placeItemView(place: Place) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(place.name)
-                .font(.headline)
-                .foregroundColor(.primary)
+                .font(WeatherSize.medium.size)
+                .foregroundColor(WeatherColor.primary.color)
 
             Text(place.display_name)
-                .font(.subheadline)
-                .foregroundColor(.secondary)
+                .font(WeatherSize.smallPlus.size)
+                .foregroundColor(WeatherColor.primaryLight.color)
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(.ultraThinMaterial) // Efecto translúcido
+        .background(WeatherColor.secondary.color) // Efecto translúcido
         .cornerRadius(12)
         .shadow(color: .gray.opacity(0.3), radius: 5, x: 0, y: 3)
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(WeatherColor.primary.color, lineWidth: 2)
+        )
     }
 }
 
