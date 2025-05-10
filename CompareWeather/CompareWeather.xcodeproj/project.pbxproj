@@ -251,11 +251,12 @@
 			};
 			buildConfigurationList = FD0B51902D4F9C2900C09A07 /* Build configuration list for PBXProject "CompareWeather" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = es;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				es,
 			);
 			mainGroup = FD0B518C2D4F9C2900C09A07;
 			productRefGroup = FD0B51962D4F9C2900C09A07 /* Products */;

@@ -59,6 +59,11 @@ struct PlacesListView: View {
                     }
                 }
             }
+            .alert("Error", isPresented: $viewModel.showError) {
+                Button(viewModel.close, role: .cancel) { }
+            } message: {
+                Text(viewModel.errorMessage ?? "")
+            }
         }
     }
     
@@ -75,7 +80,7 @@ struct PlacesListView: View {
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(WeatherColor.secondary.color) // Efecto translúcido
+        .background(WeatherColor.secondary.color)
         .cornerRadius(12)
         .shadow(color: .gray.opacity(0.3), radius: 5, x: 0, y: 3)
         .overlay(

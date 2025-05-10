@@ -12,7 +12,8 @@ enum WeatherColor {
     case primary
     case primaryLight
     case secondary
-    
+    case black
+
     var color: Color {
         switch self {
         case .primary:
@@ -21,6 +22,8 @@ enum WeatherColor {
                 .blue.opacity(0.5)
         case .secondary:
                 .white
+        case .black:
+                .black
         }
     }
 }

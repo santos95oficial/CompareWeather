@@ -14,12 +14,17 @@ protocol PlacesListViewModelType {
     var isLoading: Bool { get }
     var titleText: String { get }
     var close: String { get }
+    var showError: Bool { get }
+    var errorMessage: String? { get }
+    var errorTitle: String { get }
 }
 
 public final class PlacesListViewModel: ObservableObject, PlacesListViewModelType {
 
     @Published var places: [Place] = []
     @Published var isLoading = false
+    @Published var showError: Bool = false
+    @Published var errorMessage: String?
 
     private let place: String
 
@@ -39,6 +44,10 @@ public final class PlacesListViewModel: ObservableObject, PlacesListViewModelTyp
         "Cerrar"
     }
 
+    var errorTitle: String {
+        "Error"
+    }
+
     func fetchPlaces() {
         guard !place.isEmpty,
               let url = URL(string: "https://nominatim.openstreetmap.org/search?city=\(place)&format=json") else {
@@ -55,6 +64,8 @@ public final class PlacesListViewModel: ObservableObject, PlacesListViewModelTyp
             guard let data,
                   error == nil
             else {
+                self.showError = true
+                self.errorMessage = "No se ha podido obtener ninguna información"
                 return
             }
 
@@ -64,7 +75,8 @@ public final class PlacesListViewModel: ObservableObject, PlacesListViewModelTyp
                     self.places = decodedResponse
                 }
             } catch {
-                print("Error decoding JSON: \(error)")
+                self.showError = true
+                self.errorMessage = "No se ha podido obtener ninguna información"
             }
         }.resume()
     }
